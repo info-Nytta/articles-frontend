@@ -1,0 +1,10 @@
+<section class="articles-page">
+    <header class="main-header">
+        <img src="hero.jpg" alt="főkép">
+    </header>
+    <div class="articles-list">
+        @for (item of articles; track item.id) {
+            <app-article-card [article]="item"></app-article-card>
+        }
+    </div>
+</section>

@@ -1,0 +1,11 @@
+<article class="article-card">
+    <div class="article-cover">
+        <img [src]="article.coverImage" alt="cikk kép">
+    </div>
+    <h2 class="article-title">{{ article.title }}</h2>
+    <p class="article-summary">{{ article.summary }}</p>
+    <div class="article-footer">
+        <span class="article-reading-time">{{ article.readingTime }} perc</span>
+        <a class="article-link" routerLink="/articles/{{ article.id }}">Olvasás</a>
+    </div>
+</article>

@@ -1,0 +1,12 @@
+<section class="article-page">
+    @if (article) {
+        <header class="page-hero">
+            <img [src]="article.coverImage" alt="cikk kép">
+        </header>
+        <div class="article-details">
+            <h2>{{ article.title }}</h2>
+            <p class="reading-time">{{article.readingTime}}</p>
+            <div class="article-content" [innerHTML]="article.content"></div>
+        </div>
+    }
+</section>

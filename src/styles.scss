@@ -1,1 +1,410 @@
-/* You can add global styles to this file, and also import other style files */
+/* Shared palette and typography */
+:root {
+  color-scheme: light;
+  --paper: #f5f3ec;
+  --surface: #fffef9;
+  --ink: #202c27;
+  --muted: #637069;
+  --green: #245641;
+  --line: #dedfd4;
+  --serif: Georgia, 'Times New Roman', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #dce6bd;
+  color: #183b2c;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--green);
+  text-underline-offset: 0.22em;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 5px;
+  border-radius: 3px;
+}
+
+app-root,
+app-main-page,
+app-article-page,
+app-article-card {
+  display: block;
+  min-width: 0;
+}
+
+/* Full-width masthead, shared by both pages */
+.main-header {
+  position: relative;
+  padding: 22px 24px 25px;
+  border-top: 5px solid var(--green);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  text-align: center;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 76px);
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.055em;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 5px;
+      border-block: 1px solid var(--line);
+    }
+  }
+
+  .home-link {
+    flex-shrink: 0;
+    color: var(--green);
+    text-decoration: none;
+  }
+}
+
+.articles-page {
+  width: min(1200px, calc(100% - 64px));
+  margin: 36px auto 80px;
+}
+
+/* The original photograph provides the visual lead. */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 40px;
+  border-radius: 5px;
+  background: #e0e1d6;
+  box-shadow: 0 12px 28px -18px #26372a66;
+
+  img {
+    width: 100%;
+    aspect-ratio: 2.8 / 1;
+    object-fit: cover;
+    object-position: center 48%;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid #25392a1a;
+    border-bottom: 4px solid var(--green);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+/* Responsive news cards */
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  box-shadow: 0 3px 8px #25392a04;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+
+  .article-cover {
+    overflow: hidden;
+    background: #e4e6dc;
+    border-bottom: 1px solid var(--line);
+
+    img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      transition: transform 350ms ease;
+    }
+  }
+
+  .article-title {
+    margin: 23px 24px 12px;
+    font-family: var(--serif);
+    font-size: clamp(23px, 2.1vw, 28px);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+  }
+
+  .article-summary {
+    margin: 0 24px 26px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .article-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: auto 24px 0;
+    padding: 16px 0 19px;
+    border-top: 1px solid var(--line);
+  }
+
+  .article-reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+
+    &::before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      background:
+        linear-gradient(currentColor, currentColor) 5px 2px / 1px 5px no-repeat,
+        linear-gradient(currentColor, currentColor) 5px 6px / 4px 1px no-repeat;
+    }
+  }
+
+  .article-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1px solid #dce4d7;
+    border-radius: 4px;
+    background: #eef2e7;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background 180ms ease, color 180ms ease;
+
+    &::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-top: 1.5px solid currentColor;
+      border-right: 1.5px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    &:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .article-card:hover {
+    transform: translateY(-4px);
+    border-color: #b7c6b4;
+    box-shadow: 0 14px 30px -12px #25392a26;
+
+    .article-cover img {
+      transform: scale(1.035);
+    }
+  }
+}
+
+/* Article typography also applies to the HTML inserted through innerHTML. */
+.article-details {
+  position: relative;
+  max-width: 880px;
+  margin: -100px auto 0;
+  padding: clamp(28px, 5vw, 64px);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px -24px #25392a40;
+  overflow-wrap: anywhere;
+
+  > h2 {
+    margin: 0 0 24px;
+    font-family: var(--serif);
+    font-size: clamp(30px, 4.4vw, 52px);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    text-wrap: pretty;
+  }
+
+  .author,
+  .reading-time {
+    display: inline-block;
+    margin: 0 16px 12px 0;
+    font-size: 14px;
+  }
+
+  .author {
+    color: var(--green);
+    font-weight: 650;
+  }
+
+  .reading-time {
+    padding-left: 16px;
+    border-left: 1px solid var(--line);
+    color: var(--muted);
+  }
+}
+
+.article-content {
+  margin-top: 18px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+  line-height: 1.85;
+
+  p {
+    margin: 0 0 1.35em;
+  }
+
+  > p:first-child {
+    color: var(--green);
+    font-size: 1.15em;
+    line-height: 1.65;
+  }
+
+  h2,
+  h3,
+  h4 {
+    margin: 1.5em 0 0.6em;
+    font-family: var(--serif);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  h2 { font-size: 1.65em; }
+  h3 { font-size: 1.3em; }
+
+  ul,
+  ol {
+    margin: 1.25em 0 1.6em;
+    padding-left: 1.5em;
+  }
+
+  li {
+    padding-left: 0.3em;
+    margin-bottom: 0.4em;
+
+    &::marker { color: var(--green); }
+  }
+
+  blockquote {
+    margin: 1.5em 0;
+    padding: 16px 24px;
+    border-left: 3px solid var(--green);
+    background: #eef2e7;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+
+  img { height: auto; border-radius: 4px; }
+
+  > p:last-child {
+    margin-bottom: 0;
+  }
+
+  > p:last-child:has(> em:only-child) {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 960px) {
+  .articles-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .page-hero img { aspect-ratio: 2.25 / 1; }
+  .article-details { max-width: calc(100% - 48px); }
+}
+
+@media (max-width: 600px) {
+  .main-header { padding: 18px 20px 20px; }
+
+  .articles-page {
+    width: calc(100% - 32px);
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .page-hero {
+    margin-bottom: 24px;
+
+    img { aspect-ratio: 1.6 / 1; }
+  }
+
+  .articles-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .article-card .article-title { font-size: 27px; }
+
+  .article-details {
+    max-width: 100%;
+    margin-top: 0;
+    padding: 25px 20px;
+  }
+
+  .article-content { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+
+  .article-card:hover,
+  .article-card:hover .article-cover img {
+    transform: none;
+  }
+}
